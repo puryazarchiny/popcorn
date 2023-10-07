@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        caveat: ["Caveat", "sans-serif"],
         wotfard: ["Wotfard", "sans-serif"],
       },
     },
