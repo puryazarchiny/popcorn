@@ -1,21 +1,21 @@
 const tw = (strings: TemplateStringsArray, ...values: []) =>
   String.raw({ raw: strings }, ...values);
 
-const twLi = tw`flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 hover:bg-slate-100`;
-const twNavItem = tw`focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-50`;
+const twLi = tw`flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100`;
+const twNavItem = tw`focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950`;
 
 function Header() {
   return (
     <header>
-      <div className="mx-auto flex h-[54px] max-w-[min(1280px,calc(100%-32px))] items-center justify-between text-[#24292f]">
+      <div className="mx-auto flex max-w-[min(1280px,calc(100%-32px))] items-center justify-between p-4">
         <a
           href="#"
-          className="font-caveat text-3xl font-bold focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-50"
+          className="font-caveat text-3xl font-bold text-[#24292f] focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
         >
           🍿 Popcorn
         </a>
         <nav>
-          <ul className="flex gap-1">
+          <ul className="flex gap-2">
             <li className={twLi}>
               <a href="#" className={twNavItem}>
                 <svg

@@ -1,0 +1,65 @@
+import { useEffect, useState } from "react";
+
+import { Movie } from "./Main";
+
+interface SearchBarProps {
+  setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+}
+
+function SearchBar({ setMovies }: SearchBarProps) {
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    fetch(`http://www.omdbapi.com/?apikey=886e3304&s=${query}`)
+      .then((res) => res.json())
+      .then((data) => data.Error || setMovies(data.Search));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  return (
+    <div className="flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 focus-within:bg-slate-800">
+      <div className="flex items-center justify-center text-slate-500">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+          />
+        </svg>
+      </div>
+      <input
+        type="text"
+        name="movie"
+        placeholder="Search"
+        value={query}
+        className="h-12 w-full bg-transparent text-slate-300 outline-none placeholder:text-slate-500"
+        onChange={(event) => setQuery(event.target.value)}
+      />
+      <div className="flex items-center justify-center text-slate-500">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+export default SearchBar;
