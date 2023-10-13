@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import MovieList from "./MovieList";
+import Container from "./Container";
 import SearchBar from "./SearchBar";
+import MovieList from "./MovieList";
 
 export interface Movie {
   Title: string;
@@ -13,26 +14,40 @@ export interface Movie {
 
 function Main() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <main>
       <section>
-        <div className="mx-auto flex max-w-[min(1280px,calc(100%-32px))] flex-col items-center justify-center gap-8 rounded-2xl bg-slate-950 px-4 py-16">
-          <h1 className="text-center text-2xl font-bold text-slate-300">
+        <Container classes="flex flex-col items-center gap-8 rounded-2xl bg-slate-950 px-4 py-16">
+          <h1 className="text-2xl font-bold text-slate-300">
             Search for the desired movie
           </h1>
-          <SearchBar setMovies={setMovies} />
-        </div>
+          <SearchBar
+            movies={movies}
+            error={error}
+            setMovies={setMovies}
+            setError={setError}
+            setIsLoading={setIsLoading}
+          />
+        </Container>
       </section>
 
       <section>
-        <div className="mx-auto mt-4 max-w-[min(1280px,calc(100%-32px))] space-y-4 rounded-2xl bg-slate-950 p-4">
-          <p className="text-lg font-bold text-slate-300">
+        <Container classes="mt-4 space-y-4 rounded-2xl bg-slate-950 p-4">
+          <p className="text-center font-bold text-slate-300">
             Found {movies.length || 0} results
           </p>
           <hr />
-          <MovieList movies={movies} />
-        </div>
+          {isLoading ? (
+            <p className="text-center font-bold text-slate-300">Loading...</p>
+          ) : !error ? (
+            <MovieList movies={movies} />
+          ) : (
+            <p className="text-center font-bold text-slate-300">{error}</p>
+          )}
+        </Container>
       </section>
     </main>
   );

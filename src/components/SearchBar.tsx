@@ -3,22 +3,59 @@ import { useEffect, useState } from "react";
 import { Movie } from "./Main";
 
 interface SearchBarProps {
+  movies: Movie[];
+  error: string;
   setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function SearchBar({ setMovies }: SearchBarProps) {
+function SearchBar({
+  movies,
+  error,
+  setMovies,
+  setError,
+  setIsLoading,
+}: SearchBarProps) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=886e3304&s=${query}`)
-      .then((res) => res.json())
-      .then((data) => data.Error || setMovies(data.Search));
+    const fetchMovie = async () => {
+      try {
+        error && setError("");
+
+        setIsLoading(true);
+
+        const response = await fetch(
+          `http://www.omdbapi.com/?apikey=886e3304&s=${query || "fast"}`,
+        );
+
+        const data = await response.json();
+
+        if (data.Response === "False") {
+          movies && setMovies([]);
+          throw new Error(`${data.Error}`);
+        }
+
+        setMovies(data.Search);
+      } catch (error) {
+        if (error instanceof Error) {
+          movies && setMovies([]);
+          setError(error.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMovie();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (
-    <div className="flex items-center justify-center gap-2 rounded-full bg-slate-900 px-4 focus-within:bg-slate-800">
-      <div className="flex items-center justify-center text-slate-500">
+    <div className="flex items-center gap-2 rounded-full bg-slate-900 px-4 focus-within:bg-slate-800">
+      <div className="text-slate-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -34,15 +71,17 @@ function SearchBar({ setMovies }: SearchBarProps) {
           />
         </svg>
       </div>
+
       <input
         type="text"
         name="movie"
         placeholder="Search"
         value={query}
-        className="h-12 w-full bg-transparent text-slate-300 outline-none placeholder:text-slate-500"
+        className="h-12 bg-transparent text-slate-300 outline-none placeholder:text-slate-500"
         onChange={(event) => setQuery(event.target.value)}
       />
-      <div className="flex items-center justify-center text-slate-500">
+
+      <div className="text-slate-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

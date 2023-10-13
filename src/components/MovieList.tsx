@@ -11,19 +11,19 @@ function MovieList({ movies }: MovieListProps) {
         return (
           <li
             key={movie.imdbID}
-            className="flex flex-col gap-4 rounded-lg bg-slate-900 p-4"
+            className="grid grid-rows-[auto_1fr_auto] gap-4 rounded-lg bg-slate-900 p-4"
           >
             <img
               src={movie.Poster}
               alt="movie"
               className="aspect-square w-full object-contain"
             />
-            <div className="flex grow flex-col">
-              <h2 className="grow text-lg font-bold text-slate-300">
-                {movie.Title}
-              </h2>
+
+            <h2 className="text-lg font-bold text-slate-300">{movie.Title}</h2>
+
+            <div className="flex justify-between">
               <p className="text-slate-500">🗓 {movie.Year}</p>
-              <p className="text-slate-500">{movie.Type}</p>
+              <p className="text-slate-500">📁 {movie.Type}</p>
             </div>
           </li>
         );
