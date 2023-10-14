@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Movie } from "./Main";
 
@@ -18,6 +18,8 @@ function SearchBar({
   setIsLoading,
 }: SearchBarProps) {
   const [query, setQuery] = useState("");
+
+  const inputRef = useRef<HTMLInputElement>(null!);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -78,25 +80,37 @@ function SearchBar({
         placeholder="Search"
         value={query}
         className="h-12 bg-transparent text-slate-300 outline-none placeholder:text-slate-500"
+        ref={inputRef}
         onChange={(event) => setQuery(event.target.value)}
       />
 
-      <div className="text-slate-500">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-6 w-6"
+      {query ? (
+        <button
+          type="button"
+          className="text-slate-500 hover:text-slate-400"
+          onClick={() => {
+            setQuery("");
+            inputRef.current.focus();
+          }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      ) : (
+        <div className="w-6"></div>
+      )}
     </div>
   );
 }
