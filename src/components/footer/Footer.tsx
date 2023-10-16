@@ -1,9 +1,9 @@
-import Container from "./Container";
+import Wrapper from "../containers/Wrapper";
 
 function Footer() {
   return (
     <footer>
-      <Container classes="flex items-center justify-center py-4">
+      <Wrapper classes="flex items-center justify-center py-4">
         <p className="text-[#24292f]">
           Made with ♥ by{" "}
           <a
@@ -14,7 +14,7 @@ function Footer() {
             Purya Zarchiny
           </a>
         </p>
-      </Container>
+      </Wrapper>
     </footer>
   );
 }

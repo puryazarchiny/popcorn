@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Movie } from "./Main";
+import Container from "../containers/Container";
 
 interface SearchBarProps {
   movies: Movie[];
@@ -56,23 +56,21 @@ function SearchBar({
   }, [query]);
 
   return (
-    <div className="flex items-center gap-2 rounded-full bg-slate-900 px-4 focus-within:bg-slate-800">
-      <div className="text-slate-500">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
-      </div>
+    <Container classes="flex items-center gap-2 rounded-full bg-slate-900 px-4 focus-within:bg-slate-800">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="h-6 w-6 text-slate-500"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+        />
+      </svg>
 
       <input
         type="text"
@@ -87,7 +85,6 @@ function SearchBar({
       {query ? (
         <button
           type="button"
-          className="text-slate-500 hover:text-slate-400"
           onClick={() => {
             setQuery("");
             inputRef.current.focus();
@@ -99,7 +96,7 @@ function SearchBar({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="h-6 w-6"
+            className="h-6 w-6 text-slate-500 hover:text-slate-400"
           >
             <path
               strokeLinecap="round"
@@ -111,7 +108,7 @@ function SearchBar({
       ) : (
         <div className="w-6"></div>
       )}
-    </div>
+    </Container>
   );
 }
 

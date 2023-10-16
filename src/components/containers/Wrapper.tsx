@@ -1,9 +1,9 @@
-interface ContainerProps {
+interface WrapperProps {
   classes: string;
   children: React.ReactNode;
 }
 
-function Container({ classes, children }: ContainerProps) {
+function Wrapper({ classes, children }: WrapperProps) {
   return (
     <div className={"mx-auto max-w-[min(1280px,calc(100%-32px))] " + classes}>
       {children}
@@ -11,4 +11,4 @@ function Container({ classes, children }: ContainerProps) {
   );
 }
 
-export default Container;
+export default Wrapper;

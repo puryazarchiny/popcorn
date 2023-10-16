@@ -1,15 +1,12 @@
-const tw = (strings: TemplateStringsArray, ...values: []) =>
-  String.raw({ raw: strings }, ...values);
-
-const twLi = tw`flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100`;
-const twNavItem = tw`focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950`;
-
-function Navbar() {
+function Nav() {
   return (
     <nav>
       <ul className="flex gap-2">
-        <li className={twLi}>
-          <a href="#" className={twNavItem}>
+        <li className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100">
+          <a
+            href="#"
+            className="focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -25,11 +22,11 @@ function Navbar() {
           </a>
         </li>
 
-        <li className={twLi}>
+        <li className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100">
           <a
             href="https://github.com/puryazarchiny/popcorn"
             target="_blank"
-            className={twNavItem}
+            className="focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
           >
             <img
               src="/icons/github-mark.svg"
@@ -43,4 +40,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Nav;
