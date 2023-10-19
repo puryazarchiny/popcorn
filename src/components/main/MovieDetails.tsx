@@ -44,9 +44,12 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=886e3304&i=${movieID}`,
       );
+
       const data = await response.json();
+
       setMovieDetails(data);
     };
+
     fetchMovie();
   }, [movieID]);
 
@@ -74,7 +77,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
           </svg>
         </a>
 
-        <h2 className="font-bold text-slate-300">{movieDetails?.Title}</h2>
+        <p className="font-bold text-slate-300">{movieDetails?.Title}</p>
 
         <button
           type="button"
@@ -117,7 +120,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
         <img src={movieDetails?.Poster} alt="Movie poster" />
 
         <Container classes="space-y-4 py-4">
-          <h2 className="text-2xl font-bold text-slate-300">
+          <h2 className="text-lg font-bold text-slate-300">
             {movieDetails?.Title}
           </h2>
 
@@ -135,6 +138,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
                   clipRule="evenodd"
                 />
               </svg>
+
               <p className="text-slate-300">
                 {movieDetails?.imdbRating}
                 <span className="text-slate-500">/10</span>
@@ -156,6 +160,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
                   d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
                 />
               </svg>
+
               <p className="text-slate-300">{movieDetails?.Type}</p>
             </li>
 
@@ -174,6 +179,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
                 />
               </svg>
+
               <p className="text-slate-300">
                 {movieDetails?.Released.slice(-4)}
               </p>
@@ -194,6 +200,7 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
                   d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
+
               <p className="text-slate-300">
                 {Math.round(Number(movieDetails?.Runtime.slice(0, -4)) / 60)}h{" "}
                 {Number(movieDetails?.Runtime.slice(0, -4)) % 60}m

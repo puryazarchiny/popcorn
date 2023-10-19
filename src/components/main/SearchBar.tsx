@@ -35,9 +35,7 @@ function SearchBar({
         );
 
         const data = await response.json();
-
         if (data.Response === "False") {
-          movies && setMovies([]);
           throw new Error(`${data.Error}`);
         }
 

@@ -20,6 +20,7 @@ function Main() {
           <h1 className="text-2xl font-bold text-slate-300">
             Search for the desired movie
           </h1>
+
           <SearchBar
             movies={movies}
             error={error}
