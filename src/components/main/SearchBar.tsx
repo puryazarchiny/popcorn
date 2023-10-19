@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { Movie } from "../../types";
+
 import Container from "../containers/Container";
 
 interface SearchBarProps {

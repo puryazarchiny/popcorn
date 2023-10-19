@@ -1,3 +1,5 @@
+import { Movie } from "../../types";
+
 import Cards from "../containers/Cards";
 import Container from "../containers/Container";
 

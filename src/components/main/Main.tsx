@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { Movie } from "../../types";
+
 import Wrapper from "../containers/Wrapper";
 import SearchBar from "./SearchBar";
 import MovieList from "./MovieList";
