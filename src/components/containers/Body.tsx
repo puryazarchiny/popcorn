@@ -5,7 +5,7 @@ interface BodyProps {
 
 function Body({ classes, children }: BodyProps) {
   return (
-    <div className={"grid grid-rows-[auto_1fr_auto] " + classes}>
+    <div className={"grid min-h-screen grid-rows-[auto_1fr_auto] " + classes}>
       {children}
     </div>
   );
