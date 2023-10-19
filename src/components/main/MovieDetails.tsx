@@ -53,6 +53,16 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
     fetchMovie();
   }, [movieID]);
 
+  useEffect(() => {
+    if (!movieDetails?.Title) return;
+
+    document.title = `${movieDetails?.Title} - Popcorn`;
+
+    return () => {
+      document.title = "Popcorn";
+    };
+  }, [movieDetails?.Title]);
+
   return (
     <Container classes="flex flex-col gap-4">
       <Container classes="flex items-center justify-between">
