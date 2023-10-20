@@ -24,14 +24,21 @@ function SearchBar({
   const inputRef = useRef<HTMLInputElement>(null!);
 
   useEffect(() => {
+    if (!query) {
+      error && setError("");
+      return;
+    }
+
+    const controller = new AbortController();
+
     const fetchMovie = async () => {
       try {
         error && setError("");
-
         setIsLoading(true);
 
         const response = await fetch(
-          `http://www.omdbapi.com/?apikey=886e3304&s=${query || "fast"}`,
+          `http://www.omdbapi.com/?apikey=886e3304&s=${query}`,
+          { signal: controller.signal },
         );
 
         const data = await response.json();
@@ -40,8 +47,12 @@ function SearchBar({
         }
 
         setMovies(data.Search);
+        error && setError("");
       } catch (error) {
-        if (error instanceof Error) {
+        if (
+          error instanceof Error &&
+          error.message !== "The user aborted a request."
+        ) {
           movies && setMovies([]);
           setError(error.message);
         }
@@ -51,6 +62,8 @@ function SearchBar({
     };
 
     fetchMovie();
+
+    return () => controller.abort();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -87,6 +100,7 @@ function SearchBar({
           type="button"
           onClick={() => {
             setQuery("");
+            setMovies([]);
             inputRef.current.focus();
           }}
         >
