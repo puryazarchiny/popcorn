@@ -1,5 +1,5 @@
 interface WrapperProps {
-  classes: string;
+  classes?: string;
   children: React.ReactNode;
 }
 

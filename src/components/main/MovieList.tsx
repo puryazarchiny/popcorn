@@ -10,7 +10,7 @@ interface MovieListProps {
 
 function MovieList({ movies, setMovieID }: MovieListProps) {
   return (
-    <Cards classes="gap-4">
+    <Cards classes={!movies.length ? "gap-4" : "mt-4 gap-4"}>
       {movies.map((movie) => {
         return (
           <li

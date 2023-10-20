@@ -24,6 +24,7 @@ function Main() {
           <SearchBar
             movies={movies}
             error={error}
+            isLoading={isLoading}
             setMovies={setMovies}
             setError={setError}
             setIsLoading={setIsLoading}
@@ -32,20 +33,22 @@ function Main() {
       </section>
 
       <section>
-        <Wrapper classes="mt-4 space-y-4 rounded-2xl bg-slate-950 p-4">
+        <Wrapper classes="mt-4 rounded-2xl bg-slate-950 p-4">
           {!movieID ? (
             <>
               <p className="py-[6px] text-center font-bold text-slate-300">
                 Found {movies.length || 0} results
               </p>
               {isLoading ? (
-                <p className="text-center font-bold text-slate-300">
+                <p className="mt-4 text-center font-bold text-slate-300">
                   Loading...
                 </p>
               ) : !error ? (
                 <MovieList movies={movies} setMovieID={setMovieID} />
               ) : (
-                <p className="text-center font-bold text-slate-300">{error}</p>
+                <p className="mt-4 text-center font-bold text-slate-300">
+                  {error}
+                </p>
               )}
             </>
           ) : (

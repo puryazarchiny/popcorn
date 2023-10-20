@@ -126,15 +126,17 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
         </button>
       </Container>
 
-      <Container classes="flex grow gap-4 bg-slate-900 p-4 rounded-lg">
-        <img src={movieDetails?.Poster} alt="Movie poster" />
+      <Container classes="flex grow flex-wrap justify-center gap-4 rounded-lg bg-slate-900 p-4 lg:flex-nowrap">
+        <Container classes="lg:shrink-0">
+          <img src={movieDetails?.Poster} alt="Movie poster" />
+        </Container>
 
-        <Container classes="space-y-4 py-4">
-          <h2 className="text-lg font-bold text-slate-300">
+        <Container classes="flex flex-col gap-4">
+          <h2 className="text-center text-lg font-bold text-slate-300">
             {movieDetails?.Title}
           </h2>
 
-          <ul className="space-y-4">
+          <ul className="grow space-y-4 border border-slate-800 p-4">
             <li className="flex gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -7,6 +7,7 @@ import Container from "../containers/Container";
 interface SearchBarProps {
   movies: Movie[];
   error: string;
+  isLoading: boolean;
   setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
   setError: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ interface SearchBarProps {
 function SearchBar({
   movies,
   error,
+  isLoading,
   setMovies,
   setError,
   setIsLoading,
@@ -25,7 +27,9 @@ function SearchBar({
 
   useEffect(() => {
     if (!query) {
+      movies && setMovies([]);
       error && setError("");
+      isLoading && setIsLoading(false);
       return;
     }
 
@@ -48,6 +52,7 @@ function SearchBar({
 
         setMovies(data.Search);
         error && setError("");
+        setIsLoading(false);
       } catch (error) {
         if (
           error instanceof Error &&
@@ -55,9 +60,8 @@ function SearchBar({
         ) {
           movies && setMovies([]);
           setError(error.message);
+          setIsLoading(false);
         }
-      } finally {
-        setIsLoading(false);
       }
     };
 
