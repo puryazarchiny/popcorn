@@ -45,7 +45,7 @@ function SearchBar({
         setIsLoading(true);
 
         const response = await fetch(
-          `http://www.omdbapi.com/?apikey=886e3304&s=${query}`,
+          `https://www.omdbapi.com/?apikey=886e3304&s=${query}`,
           { signal: controller.signal },
         );
 
