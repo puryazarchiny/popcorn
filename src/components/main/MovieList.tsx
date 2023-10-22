@@ -15,16 +15,19 @@ function MovieList({ movies, setMovieID }: MovieListProps) {
         return (
           <li
             key={movie.imdbID}
-            className="grid cursor-pointer grid-cols-2 grid-rows-[auto_1fr_auto] gap-y-4 rounded-lg bg-slate-900 p-4"
-            onClick={() => setMovieID(movie.imdbID)}
+            className="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-y-4 rounded-lg bg-slate-900 p-4"
           >
             <img
               src={movie.Poster}
               alt="Movie poster"
-              className="col-span-full aspect-square w-full object-contain"
+              className="col-span-full aspect-square w-full cursor-pointer object-contain"
+              onClick={() => setMovieID(movie.imdbID)}
             />
 
-            <h2 className="col-span-full text-lg font-bold text-slate-300">
+            <h2
+              className="col-span-full cursor-pointer text-lg font-bold text-slate-300"
+              onClick={() => setMovieID(movie.imdbID)}
+            >
               {movie.Title}
             </h2>
 

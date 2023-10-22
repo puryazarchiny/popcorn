@@ -1,11 +1,20 @@
-function Nav() {
+interface NavProps {
+  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+  setMovieID: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Nav({ setDisplayFavorites, setMovieID }: NavProps) {
   return (
     <nav>
       <ul className="flex gap-2">
-        <li className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100">
-          <a
-            href="#"
-            className="focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+        <li>
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100 focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+            onClick={() => {
+              setDisplayFavorites(true);
+              setMovieID("");
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -19,14 +28,14 @@ function Nav() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </button>
         </li>
 
-        <li className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100">
+        <li>
           <a
             href="https://github.com/puryazarchiny/popcorn"
             target="_blank"
-            className="focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100 focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
           >
             <img
               src="/icons/github-mark.svg"

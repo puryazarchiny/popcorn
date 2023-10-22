@@ -1,43 +1,24 @@
 import { useEffect, useState } from "react";
 
+import { FullMovie } from "../../types";
+
 import Container from "../containers/Container";
 
 interface MovieDetailsProps {
   movieID: string;
+  favorites: FullMovie[];
   setMovieID: React.Dispatch<React.SetStateAction<string>>;
+  setFavorites: React.Dispatch<React.SetStateAction<FullMovie[]>>;
 }
 
-interface MovieDetails {
-  Actors: string;
-  Awards: string;
-  BoxOffice: string;
-  Country: string;
-  DVD: string;
-  Director: string;
-  Genre: string;
-  Language: string;
-  Metascore: string;
-  Plot: string;
-  Poster: string;
-  Production: string;
-  Rated: string;
-  Ratings: { Source: string; Value: string }[];
-  Released: string;
-  Response: string;
-  Runtime: string;
-  Title: string;
-  Type: string;
-  Website: string;
-  Writer: string;
-  Year: string;
-  imdbID: string;
-  imdbRating: string;
-  imdbVotes: string;
-}
-
-function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
-  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
-  const [bookmark, setBookmark] = useState(false);
+function MovieDetails({
+  movieID,
+  favorites,
+  setMovieID,
+  setFavorites,
+}: MovieDetailsProps) {
+  const [movieDetails, setMovieDetails] = useState<FullMovie | null>(null);
+  const [isBookmarked, setIsBookmark] = useState(false);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -66,9 +47,9 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
   return (
     <Container classes="flex flex-col gap-4">
       <Container classes="flex items-center justify-between">
-        <a
+        <button
           type="button"
-          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-800 text-slate-300 hover:bg-slate-700"
+          className="flex h-9 w-9 items-center justify-center rounded bg-slate-800 text-slate-300 hover:bg-slate-700"
           onClick={() => setMovieID("")}
         >
           <svg
@@ -85,16 +66,26 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
               d="M15.75 19.5L8.25 12l7.5-7.5"
             />
           </svg>
-        </a>
+        </button>
 
         <p className="font-bold text-slate-300">{movieDetails?.Title}</p>
 
         <button
           type="button"
           className="flex h-9 w-9 items-center justify-center rounded bg-slate-800 text-slate-300 hover:bg-slate-700"
-          onClick={() => setBookmark(!bookmark)}
+          onClick={() => {
+            setIsBookmark(!isBookmarked);
+            !favorites.find((favorite) => favorite.imdbID === movieID)
+              ? setFavorites((favorites) => {
+                  if (!movieDetails) return favorites;
+                  return [...favorites, movieDetails];
+                })
+              : setFavorites(
+                  favorites.filter((favorite) => favorite.imdbID !== movieID),
+                );
+          }}
         >
-          {!bookmark ? (
+          {!favorites.find((favorite) => favorite.imdbID === movieID) ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -126,12 +117,12 @@ function MovieDetails({ movieID, setMovieID }: MovieDetailsProps) {
         </button>
       </Container>
 
-      <Container classes="flex grow flex-wrap justify-center gap-4 rounded-lg bg-slate-900 p-4 lg:flex-nowrap">
+      <Container classes="flex grow flex-wrap justify-center gap-4 rounded-lg bg-slate-900 p-4 lg:flex-nowrap lg:justify-normal">
         <Container classes="lg:shrink-0">
           <img src={movieDetails?.Poster} alt="Movie poster" />
         </Container>
 
-        <Container classes="flex flex-col gap-4">
+        <Container classes="flex grow flex-col gap-4">
           <h2 className="text-center text-lg font-bold text-slate-300">
             {movieDetails?.Title}
           </h2>

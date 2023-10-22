@@ -1,23 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Movie } from "../../types";
+import { Movie, FullMovie } from "../../types";
 
 import Wrapper from "../containers/Wrapper";
 import SearchBar from "./SearchBar";
 import MovieList from "./MovieList";
 import MovieDetails from "./MovieDetails";
+import Favorites from "./Favorites";
 
-function Main() {
+interface MainProps {
+  movieID: string;
+  displayFavorites: boolean;
+  setMovieID: React.Dispatch<React.SetStateAction<string>>;
+  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Main({
+  movieID,
+  displayFavorites,
+  setMovieID,
+  setDisplayFavorites,
+}: MainProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [movieID, setMovieID] = useState("");
+  const [favorites, setFavorites] = useState<FullMovie[]>(() => {
+    const storedValue = localStorage.getItem("favorites");
+    if (!storedValue) return [];
+    return JSON.parse(storedValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <main>
       <section>
         <Wrapper classes="flex flex-col items-center gap-8 rounded-2xl bg-slate-950 px-4 py-16">
-          <h1 className="text-2xl font-bold text-slate-300">
+          <h1 className="text-center text-2xl font-bold text-slate-300">
             Search for the desired movie
           </h1>
 
@@ -28,13 +49,15 @@ function Main() {
             setMovies={setMovies}
             setError={setError}
             setIsLoading={setIsLoading}
+            setMovieID={setMovieID}
+            setDisplayFavorites={setDisplayFavorites}
           />
         </Wrapper>
       </section>
 
       <section>
         <Wrapper classes="mt-4 rounded-2xl bg-slate-950 p-4">
-          {!movieID ? (
+          {!movieID && !displayFavorites ? (
             <>
               <p className="py-[6px] text-center font-bold text-slate-300">
                 Found {movies.length || 0} results
@@ -51,8 +74,20 @@ function Main() {
                 </p>
               )}
             </>
+          ) : movieID ? (
+            <MovieDetails
+              movieID={movieID}
+              favorites={favorites}
+              setMovieID={setMovieID}
+              setFavorites={setFavorites}
+            />
           ) : (
-            <MovieDetails movieID={movieID} setMovieID={setMovieID} />
+            <Favorites
+              favorites={favorites}
+              setFavorites={setFavorites}
+              setDisplayFavorites={setDisplayFavorites}
+              setMovieID={setMovieID}
+            />
           )}
         </Wrapper>
       </section>

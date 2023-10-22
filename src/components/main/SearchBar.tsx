@@ -11,6 +11,8 @@ interface SearchBarProps {
   setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
   setError: React.Dispatch<React.SetStateAction<string>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setMovieID: React.Dispatch<React.SetStateAction<string>>;
+  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function SearchBar({
@@ -20,6 +22,8 @@ function SearchBar({
   setMovies,
   setError,
   setIsLoading,
+  setMovieID,
+  setDisplayFavorites,
 }: SearchBarProps) {
   const [query, setQuery] = useState("");
 
@@ -96,7 +100,11 @@ function SearchBar({
         value={query}
         className="h-12 bg-transparent text-slate-300 outline-none placeholder:text-slate-500"
         ref={inputRef}
-        onChange={(event) => setQuery(event.target.value)}
+        onChange={(event) => {
+          setQuery(event.target.value);
+          setMovieID("");
+          setDisplayFavorites(false);
+        }}
       />
 
       {query ? (

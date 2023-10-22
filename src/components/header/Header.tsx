@@ -1,7 +1,12 @@
 import Wrapper from "../containers/Wrapper";
 import Nav from "./Nav";
 
-function Header() {
+interface HeaderProps {
+  setDisplayFavorites: React.Dispatch<React.SetStateAction<boolean>>;
+  setMovieID: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Header({ setDisplayFavorites, setMovieID }: HeaderProps) {
   return (
     <header>
       <Wrapper classes="flex justify-between p-4">
@@ -12,7 +17,10 @@ function Header() {
           🍿 Popcorn
         </a>
 
-        <Nav />
+        <Nav
+          setDisplayFavorites={setDisplayFavorites}
+          setMovieID={setMovieID}
+        />
       </Wrapper>
     </header>
   );
