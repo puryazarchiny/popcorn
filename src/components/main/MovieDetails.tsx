@@ -23,7 +23,7 @@ function MovieDetails({
   useEffect(() => {
     const fetchMovie = async () => {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=886e3304&i=${movieID}`,
+        `https://www.omdbapi.com/?apikey=886e3304&i=${movieID}`,
       );
 
       const data = await response.json();
