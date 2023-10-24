@@ -10,7 +10,7 @@ function Nav({ setDisplayFavorites, setMovieID }: NavProps) {
         <li>
           <button
             type="button"
-            className="flex h-9 w-9 items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100 focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+            className="flex h-9 w-9 items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100"
             onClick={() => {
               setDisplayFavorites(true);
               setMovieID("");
@@ -35,7 +35,7 @@ function Nav({ setDisplayFavorites, setMovieID }: NavProps) {
           <a
             href="https://github.com/puryazarchiny/popcorn"
             target="_blank"
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100 focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100"
           >
             <img
               src="/icons/github-mark.svg"

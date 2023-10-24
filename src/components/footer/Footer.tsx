@@ -9,7 +9,7 @@ function Footer() {
           <a
             href="https://github.com/puryazarchiny"
             target="_blank"
-            className="font-caveat text-xl font-bold focus-visible:rounded focus-visible:outline-double focus-visible:outline-2 focus-visible:outline-slate-950"
+            className="font-caveat text-xl font-bold"
           >
             Purya Zarchiny
           </a>
