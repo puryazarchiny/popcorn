@@ -1,9 +1,9 @@
-import Wrapper from "../containers/Wrapper";
+import { Wrapper } from "@/components";
 
-function Footer() {
+export function Footer() {
   return (
     <footer>
-      <Wrapper classes="flex items-center justify-center py-4">
+      <Wrapper classes="flex items-center justify-center p-4">
         <p className="text-[#24292f]">
           Made with ♥ by{" "}
           <a
@@ -18,5 +18,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

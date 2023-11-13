@@ -1,14 +1,12 @@
 interface WrapperProps {
-  classes?: string;
   children: React.ReactNode;
+  classes?: string;
 }
 
-function Wrapper({ classes, children }: WrapperProps) {
+export function Wrapper({ children, classes }: WrapperProps) {
   return (
     <div className={"mx-auto max-w-[min(1280px,calc(100%-32px))] " + classes}>
       {children}
     </div>
   );
 }
-
-export default Wrapper;
