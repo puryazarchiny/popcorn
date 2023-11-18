@@ -3,8 +3,8 @@ import { Wrapper } from "@/components";
 export function Footer() {
   return (
     <footer>
-      <Wrapper classes="flex items-center justify-center p-4">
-        <p className="text-[#24292f]">
+      <Wrapper>
+        <p className="p-4 text-center text-[#24292f]">
           Made with ♥ by{" "}
           <a
             href="https://github.com/puryazarchiny"

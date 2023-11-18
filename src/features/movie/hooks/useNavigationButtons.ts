@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useMovie } from "./useMovie";
+import { useMovie } from "@/features/movie";
 
 export function useNavigationButtons() {
   const { setFullMovie } = useMovie();

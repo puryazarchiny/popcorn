@@ -26,7 +26,7 @@ export function useFetch(type: string, movie: string | undefined) {
 
     const controller = new AbortController();
 
-    const getMovie = async () => {
+    const getMovies = async () => {
       try {
         error && setError("");
         setIsLoading(true);
@@ -57,7 +57,7 @@ export function useFetch(type: string, movie: string | undefined) {
       }
     };
 
-    getMovie();
+    getMovies();
 
     return () => controller.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps

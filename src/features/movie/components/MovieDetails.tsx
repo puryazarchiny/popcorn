@@ -10,8 +10,8 @@ import { useMovie } from "@/features/movie";
 
 export function MovieDetails() {
   const { fullMovie } = useMovie();
-  const hour = Math.round(Number(fullMovie?.Runtime.slice(0, -4)) / 60);
-  const minute = Number(fullMovie?.Runtime.slice(0, -4)) % 60;
+  const hours = Math.round(Number(fullMovie?.Runtime.slice(0, -4)) / 60);
+  const minutes = Number(fullMovie?.Runtime.slice(0, -4)) % 60;
   const tags = fullMovie?.Genre.split(", ").map((tag) => (
     <li
       key={tag}
@@ -49,7 +49,7 @@ export function MovieDetails() {
           <ClockIcon className="h-6 w-6 text-slate-500" />
 
           <p className="text-slate-300">
-            {hour}h {minute}m
+            {hours}h {minutes}m
           </p>
         </li>
 
