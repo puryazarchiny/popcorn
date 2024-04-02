@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-
-import { Body, Footer, Header } from "@/components";
+import { Footer, Header } from "@/components";
 import { AppRoutes } from "@/routes";
 
 export function App() {
-  useEffect(() => {
-    document.body.style.cssText = `
-    margin-left: calc(100vw - 100%);
-    background-color: #cbd5e1;
-  `;
-  }, []);
+  const root = document.getElementById("root")!;
+
+  root.setAttribute(
+    "class",
+    "CONTAINER | grid min-h-screen grid-rows-[auto_1fr_auto] bg-slate-300 font-wotfard",
+  );
 
   return (
-    <Body classes="bg-slate-300 font-wotfard">
+    <>
       <Header />
       <AppRoutes />
       <Footer />
-    </Body>
+    </>
   );
 }

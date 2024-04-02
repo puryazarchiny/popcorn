@@ -1,3 +1,3 @@
 export * from "./containers";
-export * from "./elements";
+export * from "./inputs";
 export * from "./layout";

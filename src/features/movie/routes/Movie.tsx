@@ -2,7 +2,7 @@ import { ChevronLeftIcon, BookmarkIcon } from "@heroicons/react/24/outline";
 import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Box, Button, Error, Loading, Wrapper } from "@/components";
+import { Button, Wrapper } from "@/components";
 import {
   getMovies,
   MovieDetails,
@@ -22,8 +22,18 @@ export function Movie() {
   } = useMovie();
   const { imdbID } = useParams();
   const navigate = useNavigate();
-  const isBookmarked = bookmarks.some((bookmark) => bookmark.imdbID === imdbID);
+  const errorMessage = (
+    <p className="col-span-3 text-center font-bold text-slate-300">{error}</p>
+  );
+  const loading = (
+    <p className="col-span-3 text-center font-bold text-slate-300">
+      Loading...
+    </p>
+  );
   const movie = movies.find((movie) => movie.imdbID === fullMovie?.imdbID);
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.imdbID === imdbID);
+  const bookmarked = <BookmarkIconSolid className="h-6 w-6" />;
+  const notBookmarked = <BookmarkIcon className="h-6 w-6" />;
 
   const handleOnBackClick = () => {
     setFullMovie(null);
@@ -31,7 +41,7 @@ export function Movie() {
   };
 
   const handleOnBookmarkClick = () => {
-    if (!isBookmarked && movie) {
+    if (movie && !isBookmarked) {
       setBookmarks((bookmarks) => [...bookmarks, movie]);
     } else {
       setBookmarks(bookmarks.filter((bookmark) => bookmark.imdbID !== imdbID));
@@ -39,34 +49,25 @@ export function Movie() {
   };
 
   getMovies("i", imdbID);
-
   useNavigationButtons();
 
   return (
     <main>
       <section>
         <Wrapper>
-          <Box classes="flex flex-col gap-4 rounded-2xl bg-slate-950 p-4">
-            <Box classes="flex items-center justify-between">
-              <Button onClick={handleOnBackClick}>
-                <ChevronLeftIcon className="h-6 w-6" />
-              </Button>
+          <div className="CONTAINER | grid grid-cols-2 gap-y-4 rounded-2xl bg-slate-950 p-4">
+            <Button onClick={handleOnBackClick}>
+              <ChevronLeftIcon className="h-6 w-6" />
+            </Button>
 
-              <p className="font-bold text-slate-300">{fullMovie?.Title}</p>
-
-              <Button onClick={handleOnBookmarkClick}>
-                {!isBookmarked ? (
-                  <BookmarkIcon className="h-6 w-6" />
-                ) : (
-                  <BookmarkIconSolid className="h-6 w-6" />
-                )}
-              </Button>
-            </Box>
+            <Button classes="justify-self-end" onClick={handleOnBookmarkClick}>
+              {!isBookmarked ? notBookmarked : bookmarked}
+            </Button>
 
             {fullMovie && <MovieDetails />}
-            {error && <Error error={error} />}
-            {isLoading && <Loading />}
-          </Box>
+            {error && errorMessage}
+            {isLoading && loading}
+          </div>
         </Wrapper>
       </section>
     </main>

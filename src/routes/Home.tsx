@@ -1,34 +1,39 @@
-import { Box, Error, Loading, Wrapper } from "@/components";
+import { Wrapper } from "@/components";
 import { MovieList, SearchMovie, useMovie } from "@/features/movie";
 
 export function Home() {
   const { movies, error, isLoading } = useMovie();
+  const errorMessage = (
+    <p className="text-center font-bold text-slate-300">{error}</p>
+  );
+  const loading = (
+    <p className="text-center font-bold text-slate-300">Loading...</p>
+  );
 
   return (
-    <main className="flex flex-col gap-4">
+    <main className="grid grid-cols-1 content-start gap-y-4">
       <section>
         <Wrapper>
-          <Box classes="flex flex-col items-center gap-8 rounded-2xl bg-slate-950 px-4 py-16">
-            <h1 className="text-center text-2xl font-bold text-slate-300">
-              Search for the desired movie
+          <div className="CONTAINER | grid grid-cols-1 justify-items-center gap-y-8 rounded-2xl bg-slate-950 px-4 py-16">
+            <h1 className="text-2xl font-bold text-slate-300">
+              Search for your desired movie
             </h1>
-
             <SearchMovie />
-          </Box>
+          </div>
         </Wrapper>
       </section>
 
       <section>
         <Wrapper>
-          <Box classes="flex flex-col gap-4 rounded-2xl bg-slate-950 p-4">
-            <p className="flex h-9 items-center justify-center font-bold text-slate-300">
+          <div className="CONTAINER | grid grid-cols-1 gap-y-4 rounded-2xl bg-slate-950 p-4">
+            <p className="grid h-9 grid-cols-1 items-center justify-items-center font-bold text-slate-300">
               Found {movies.length || 0} results
             </p>
 
             {movies.length !== 0 && <MovieList />}
-            {error && <Error error={error} />}
-            {isLoading && <Loading />}
-          </Box>
+            {error && errorMessage}
+            {isLoading && loading}
+          </div>
         </Wrapper>
       </section>
     </main>

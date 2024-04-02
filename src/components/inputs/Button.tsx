@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   classes?: string;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export function Button({ children, classes, onClick }: ButtonProps) {
@@ -11,7 +11,7 @@ export function Button({ children, classes, onClick }: ButtonProps) {
     <button
       type="button"
       className={
-        "flex h-9 w-9 items-center justify-center rounded bg-slate-800 text-slate-300 hover:bg-slate-700 " +
+        "grid h-9 w-9 content-center justify-center rounded bg-slate-900 text-slate-300 hover:bg-slate-800 " +
         classes
       }
       onClick={onClick}

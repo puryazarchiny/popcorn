@@ -1,7 +1,6 @@
 import { CalendarIcon, FolderIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
-import { Box } from "@/components";
 import { Movie } from "@/features/movie";
 
 interface MovieCardProps {
@@ -25,15 +24,15 @@ export function MovieCard({ movie }: MovieCardProps) {
           {movie.Title}
         </h2>
 
-        <Box classes="flex gap-2">
-          <CalendarIcon className="h-6 w-6 text-slate-500" />
-          <p className="text-slate-500">{movie.Year}</p>
-        </Box>
+        <div className="CONTAINER | grid grid-cols-[auto,1fr] gap-x-2">
+          <CalendarIcon className="h-6 w-6 text-slate-800" />
+          <p className="text-slate-300">{movie.Year}</p>
+        </div>
 
-        <Box classes="flex gap-2 justify-self-end">
-          <FolderIcon className="h-6 w-6 text-slate-500" />
-          <p className="text-slate-500">{movie.Type}</p>
-        </Box>
+        <div className="CONTAINER | grid grid-cols-[1fr,auto] justify-items-end gap-x-2">
+          <FolderIcon className="h-6 w-6 text-slate-800" />
+          <p className="text-slate-300">{movie.Type}</p>
+        </div>
       </Link>
     </li>
   );

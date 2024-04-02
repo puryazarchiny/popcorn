@@ -34,7 +34,6 @@ export function useFetch(type: string, movie: string | undefined) {
         const response = await fetch(`${API_URL}&${type}=${movie}`, {
           signal: controller.signal,
         });
-
         const data = await response.json();
 
         if (data.Response === "False") {
