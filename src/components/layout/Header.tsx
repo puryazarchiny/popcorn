@@ -15,14 +15,12 @@ export function Header() {
           >
             🍿 Popcorn
           </Link>
-
           <Link
             to="/bookmarks"
             className="grid h-9 w-9 cursor-pointer content-center justify-center rounded bg-slate-200 text-[#24292f] hover:bg-slate-100"
           >
             <BookmarkIcon className="h-6 w-6" />
           </Link>
-
           <a
             href="https://github.com/puryazarchiny/popcorn"
             target="_blank"

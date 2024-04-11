@@ -59,11 +59,9 @@ export function Movie() {
             <Button onClick={handleOnBackClick}>
               <ChevronLeftIcon className="h-6 w-6" />
             </Button>
-
             <Button classes="justify-self-end" onClick={handleOnBookmarkClick}>
               {!isBookmarked ? notBookmarked : bookmarked}
             </Button>
-
             {fullMovie && <MovieDetails />}
             {error && errorMessage}
             {isLoading && loading}

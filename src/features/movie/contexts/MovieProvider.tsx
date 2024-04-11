@@ -13,7 +13,6 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bookmarks, setBookmarks] = useState<Movie[]>([]);
-
   const value = {
     movieName,
     setMovieName,

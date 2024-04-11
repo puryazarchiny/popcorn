@@ -22,14 +22,12 @@ export function Home() {
           </div>
         </Wrapper>
       </section>
-
       <section>
         <Wrapper>
           <div className="CONTAINER | grid grid-cols-1 gap-y-4 rounded-2xl bg-slate-950 p-4">
             <p className="grid h-9 grid-cols-1 items-center justify-items-center font-bold text-slate-300">
               Found {movies.length || 0} results
             </p>
-
             {movies.length !== 0 && <MovieList />}
             {error && errorMessage}
             {isLoading && loading}

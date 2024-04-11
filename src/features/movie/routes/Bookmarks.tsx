@@ -23,11 +23,9 @@ export function Bookmarks() {
             <Button classes="col-[1/2] row-[1/2]" onClick={handleOnClick}>
               <ChevronLeftIcon className="h-6 w-6" />
             </Button>
-
             <p className="col-[1/2] row-[1/2] self-center justify-self-center font-bold text-slate-300">
               Bookmarks
             </p>
-
             {bookmarks.length !== 0 && <BookmarkList />}
           </div>
         </Wrapper>
