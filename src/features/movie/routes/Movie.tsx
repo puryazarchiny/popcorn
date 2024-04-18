@@ -23,10 +23,10 @@ export function Movie() {
   const { imdbID } = useParams();
   const navigate = useNavigate();
   const errorMessage = (
-    <p className="col-span-3 text-center font-bold text-slate-300">{error}</p>
+    <p className="col-span-2 text-center font-bold text-slate-300">{error}</p>
   );
   const loading = (
-    <p className="col-span-3 text-center font-bold text-slate-300">
+    <p className="col-span-2 text-center font-bold text-slate-300">
       Loading...
     </p>
   );
@@ -48,7 +48,7 @@ export function Movie() {
     }
   };
 
-  getMovies("i", imdbID);
+  imdbID && getMovies("i", imdbID);
   useNavigationButtons();
 
   return (

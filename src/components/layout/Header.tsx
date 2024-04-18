@@ -9,10 +9,7 @@ export function Header() {
     <header>
       <Wrapper>
         <div className="CONTAINER | grid grid-cols-[1fr,auto,auto] gap-x-2 p-4">
-          <Link
-            to="/"
-            className="font-caveat text-3xl font-bold text-[#24292f]"
-          >
+          <Link to="/" className="font-caveat text-3xl text-[#24292f]">
             🍿 Popcorn
           </Link>
           <Link

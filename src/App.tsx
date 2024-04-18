@@ -1,5 +1,10 @@
+import { BrowserRouter } from "react-router-dom";
+
 import { Footer, Header } from "@/components";
+import { MovieProvider } from "@/features/movie";
 import { AppRoutes } from "@/routes";
+
+import "@/index.css";
 
 export function App() {
   const root = document.getElementById("root")!;
@@ -10,10 +15,12 @@ export function App() {
   );
 
   return (
-    <>
-      <Header />
-      <AppRoutes />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <MovieProvider>
+        <Header />
+        <AppRoutes />
+        <Footer />
+      </MovieProvider>
+    </BrowserRouter>
   );
 }

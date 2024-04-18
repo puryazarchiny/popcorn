@@ -3,37 +3,16 @@ import { useEffect } from "react";
 import { API_URL } from "@/config";
 import { useMovie } from "@/features/movie";
 
-export function useFetch(type: string, movie: string | undefined) {
-  const {
-    movies,
-    setMovies,
-    fullMovie,
-    setFullMovie,
-    error,
-    setError,
-    isLoading,
-    setIsLoading,
-  } = useMovie();
+export function useFetch(type: "s" | "i", movie: string) {
+  const { setMovies, setFullMovie, error, setError, setIsLoading } = useMovie();
 
   useEffect(() => {
-    if (!movie) {
-      movies.length !== 0 && setMovies([]);
-      fullMovie && setFullMovie(null);
-      error && setError("");
-      isLoading && setIsLoading(false);
-      return;
-    }
-
-    const controller = new AbortController();
-
     const getMovies = async () => {
       try {
         error && setError("");
         setIsLoading(true);
 
-        const response = await fetch(`${API_URL}&${type}=${movie}`, {
-          signal: controller.signal,
-        });
+        const response = await fetch(`${API_URL}&${type}=${movie}`);
         const data = await response.json();
 
         if (data.Response === "False") {
@@ -48,8 +27,8 @@ export function useFetch(type: string, movie: string | undefined) {
           error instanceof Error &&
           error.message !== "The user aborted a request."
         ) {
-          movies && type === "s" && setMovies([]);
-          fullMovie && type === "i" && setFullMovie(null);
+          type === "s" && setMovies([]);
+          type === "i" && setFullMovie(null);
           setError(error.message);
           setIsLoading(false);
         }
@@ -58,7 +37,6 @@ export function useFetch(type: string, movie: string | undefined) {
 
     getMovies();
 
-    return () => controller.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movie]);
 }

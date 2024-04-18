@@ -22,11 +22,11 @@ export function MovieCard({ movie }: MovieCardProps) {
         <h2 className="col-span-full text-lg font-bold text-slate-300">
           {movie.Title}
         </h2>
-        <div className="CONTAINER | grid grid-cols-[auto,1fr] gap-x-2">
+        <div className="CONTAINER | flex gap-2">
           <CalendarIcon className="h-6 w-6 text-slate-800" />
           <p className="text-slate-300">{movie.Year}</p>
         </div>
-        <div className="CONTAINER | grid grid-cols-[1fr,auto] justify-items-end gap-x-2">
+        <div className="CONTAINER | flex justify-end gap-2">
           <FolderIcon className="h-6 w-6 text-slate-800" />
           <p className="text-slate-300">{movie.Type}</p>
         </div>
